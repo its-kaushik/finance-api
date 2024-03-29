@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-ts-node-postgres",
+  "name": "finance-api",
   "version": "1.0.0",
-  "description": "A base template which can be used to quickly spin typescript nodejs + Postgres projects",
+  "description": "finance-api",
   "scripts": {
     "start": "ts-node src/app.ts",
     "dev": "nodemon --exec node -r ts-node/register src/app.ts",

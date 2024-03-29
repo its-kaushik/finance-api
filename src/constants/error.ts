@@ -27,3 +27,9 @@ export const PERMISSION_DENIED = {
   code: 401,
   customCode: 4015,
 };
+
+export const BAD_REQUEST = {
+  message: 'Validation error',
+  code: 400,
+  customCode: 4016,
+};

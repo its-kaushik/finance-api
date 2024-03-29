@@ -3,6 +3,7 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  VersionColumn,
 } from 'typeorm';
 
 export default class BaseEntity {
@@ -17,4 +18,7 @@ export default class BaseEntity {
 
   @DeleteDateColumn({ type: 'timestamp' })
   deletedAt!: Date;
+
+  @VersionColumn()
+  version!: number;
 }

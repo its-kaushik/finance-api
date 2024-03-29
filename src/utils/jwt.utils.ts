@@ -3,8 +3,9 @@ import { join } from 'path';
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import uuid4 from 'uuid4';
 import { RedisClient } from './redis.utils';
-import { INVALID_SESSION } from '../constants/error';
 import { customError } from './error.utils';
+import { INVALID_SESSION } from '../constants/error';
+import { envs } from '../env';
 
 const publicKey = readFileSync(
   join(`${__dirname}/../../keys/jwtPublic.key`),
@@ -16,15 +17,19 @@ const privateKey = readFileSync(
 );
 
 const options: SignOptions = {
-  issuer: process.env.JWT_ISSUER,
+  issuer: envs.JWT_ISSUER,
   subject: 'Authentication Token',
-  audience: process.env.JWT_AUDIENCE,
+  audience: envs.JWT_AUDIENCE,
   algorithm: 'RS256',
-  expiresIn: process.env.AUTH_TOKEN_EXPIRATION || '30d',
+  expiresIn: envs.AUTH_TOKEN_EXPIRATION || '30d',
 };
 
 const generateJWT = async (payload: any) => {
-  return sign(payload, privateKey, options);
+  return await sign(
+    payload,
+    { key: privateKey, passphrase: envs.SECRET_KEY || 'secret' },
+    options
+  );
 };
 
 const getSessionId = () => {
@@ -42,15 +47,21 @@ export const validateSession = async (payload: any) => {
 
 export const getJWT = async (payload: any) => {
   const sessionId = getSessionId();
+  const { entityId, userId, role, isDetailsComplete, name, email } = payload;
   const token = await generateJWT({
-    userId: payload._id,
+    name,
+    email,
+    userId,
+    entityId,
+    role,
     sessionId,
+    isDetailsComplete,
   });
 
   await RedisClient.setWithExpiry(
-    getJwtRedisKey(payload._id),
+    getJwtRedisKey(payload.userId.toString()),
     sessionId,
-    parseInt(process.env.AUTH_TOKEN_EXPIRATION || '30d', 10) * 24 * 60 * 60
+    parseInt(envs.AUTH_TOKEN_EXPIRATION || '30d', 10) * 24 * 60 * 60
   );
   return token;
 };
@@ -60,5 +71,5 @@ export const invalidateJwt = async (userId: string) => {
 };
 
 export const verifyJWT = async (token: string) => {
-  return verify(token, publicKey, options);
+  return await verify(token, publicKey, options);
 };

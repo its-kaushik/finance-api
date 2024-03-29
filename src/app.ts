@@ -1,13 +1,14 @@
 require('dotenv').config();
 
 import dbInit from './database/dbInit';
+import { envs } from './env';
 import { init } from './utils';
 import { RedisClient } from './utils/redis.utils';
 import 'reflect-metadata';
 
 const app = init();
 
-const PORT = process.env.PORT || '3000';
+const PORT = envs.PORT;
 
 dbInit()
   .then(() => {

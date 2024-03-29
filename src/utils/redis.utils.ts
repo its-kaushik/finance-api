@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+import { envs } from '../env';
 
 class Redis {
   client: any;
@@ -33,4 +34,4 @@ class Redis {
   };
 }
 
-export const RedisClient = new Redis(process.env.REDIS_URI as string);
+export const RedisClient = new Redis(envs.REDIS_URI as string);

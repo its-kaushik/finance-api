@@ -6,4 +6,7 @@ import BaseEntity from '../../common/base.entity';
 export default class Example extends BaseEntity {
   @Column()
   name!: string;
+
+  @Column({ nullable: true })
+  school?: string;
 }

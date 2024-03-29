@@ -10,7 +10,9 @@
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\"",
     "check-deps": "madge --circular . --exclude dist/",
-    "generate-keys": "ts-node src/utils/secret.utils.ts"
+    "generate-keys": "ts-node src/utils/secret.utils.ts",
+    "migrations:generate": "npx typeorm-ts-node-commonjs migration:generate ./src/migrations/migration -d ./src/database/dataSource.ts",
+    "migrations:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/database/dataSource.ts"
   },
   "pre-commit": [
     "lint",

@@ -3,7 +3,7 @@ const logger = require('morgan');
 import {
   logErrorMiddleware,
   returnError,
-} from '../middlewares/errorHandler.middlewares';
+} from '../middlewares/error.middleware';
 import router from '../routes';
 
 export const init = () => {

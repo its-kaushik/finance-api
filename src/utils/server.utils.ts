@@ -1,5 +1,9 @@
 const express = require('express');
 const logger = require('morgan');
+import {
+  logErrorMiddleware,
+  returnError,
+} from '../middlewares/errorHandler.middlewares';
 import router from '../routes';
 
 export const init = () => {
@@ -10,6 +14,9 @@ export const init = () => {
   app.use(express.urlencoded({ extended: false }));
 
   app.use('/api/v1', router);
+
+  app.use(logErrorMiddleware);
+  app.use(returnError);
 
   return app;
 };

@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface SerializerRequest extends Request {
   file?: any;
   select?: string[];

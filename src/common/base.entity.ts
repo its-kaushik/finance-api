@@ -1,11 +1,15 @@
+import { IsDate, IsPhoneNumber, Matches } from 'class-validator';
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   VersionColumn,
 } from 'typeorm';
 
+@Entity()
 export default class BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number = 0;
@@ -23,23 +27,26 @@ export default class BaseEntity {
   version!: number;
 }
 
-/* export class BasicDetails extends BaseEntity {
+@Entity()
+export class BasicDetails extends BaseEntity {
   @Column()
-  firstName: string;
+  firstName!: string;
 
   @Column()
-  lastName: string;
+  lastName!: string;
 
   @Column()
-  countryCode: string;
+  @Matches(/^\+[1-9]\d{0,2}$/)
+  countryCode!: string;
 
   @Column()
-  phoneNumber: string;
+  @IsPhoneNumber()
+  phoneNumber!: string;
 
-  @Column({ nullable: true })
-  profilePictureUrl: string;
+  @Column({ nullable: true, type: 'varchar' })
+  profilePictureUrl: string | undefined;
 
   @Column()
-  dateOfBirth: Date;
+  @IsDate()
+  dateOfBirth!: Date;
 }
- */

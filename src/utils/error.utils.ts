@@ -14,7 +14,7 @@ export function customError(error: ErrorType) {
 }
 
 export function logError(err: any) {
-  console.log(err);
+  console.error(err);
 }
 
 /* export const ErrorResponse = (res: Response, error: any) => {

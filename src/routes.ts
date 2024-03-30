@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import ExampleRouter from './modules/example/example.router';
-//import appDataSource from './database/dataSource';
-//import Example from './modules/example/example.entity';
+import UsersRouter from './modules/users/users.router';
 
 const router = Router();
 
@@ -10,5 +9,6 @@ router.get('/health', async (req: Request, res: Response) => {
 });
 
 router.use('/example', ExampleRouter);
+router.use('/user', UsersRouter);
 
 export default router;

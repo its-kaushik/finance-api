@@ -11,7 +11,13 @@ export function logErrorMiddleware(
   next(err);
 }
 
-export function returnError(err: any, req: any, res: Response) {
+export function returnError(
+  err: any,
+  req: any,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction
+) {
   const errorText = err.detail || err.message || err;
   const statusCode = err.customCode || err.status || 500;
 

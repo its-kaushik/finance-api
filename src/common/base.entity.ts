@@ -8,17 +8,38 @@ import {
 
 export default class BaseEntity {
   @PrimaryGeneratedColumn('increment')
-  id!: number;
+  id: number = 0;
 
   @CreateDateColumn({ type: 'timestamp' })
-  createdAt!: Date;
+  createdAt: Date = new Date();
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updatedAt!: Date;
+  updatedAt: Date = new Date();
 
   @DeleteDateColumn({ type: 'timestamp' })
-  deletedAt!: Date;
+  deletedAt: Date | undefined;
 
-  @VersionColumn()
+  @VersionColumn({ type: 'number' })
   version!: number;
 }
+
+/* export class BasicDetails extends BaseEntity {
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  countryCode: string;
+
+  @Column()
+  phoneNumber: string;
+
+  @Column({ nullable: true })
+  profilePictureUrl: string;
+
+  @Column()
+  dateOfBirth: Date;
+}
+ */

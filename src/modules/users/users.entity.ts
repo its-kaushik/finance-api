@@ -4,7 +4,7 @@ import { USER_ROLES } from './users.constants';
 
 @Entity()
 export default class User extends BaseEntity {
-  @Column({ unique: true })
+  @Column({ unique: true, type: 'varchar' })
   email!: string;
 
   @Column({
@@ -12,5 +12,5 @@ export default class User extends BaseEntity {
     enum: USER_ROLES,
     default: USER_ROLES.CUSTOMER,
   })
-  role!: USER_ROLES;
+  role: USER_ROLES = USER_ROLES.CUSTOMER;
 }

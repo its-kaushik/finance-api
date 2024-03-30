@@ -22,6 +22,7 @@
   "author": "Mayank Kaushik",
   "license": "ISC",
   "dependencies": {
+    "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.4.5",

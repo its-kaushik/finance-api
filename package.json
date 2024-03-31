@@ -1,7 +1,7 @@
 {
-  "name": "finance-api",
+  "name": "loantrack",
   "version": "1.0.0",
-  "description": "finance-api",
+  "description": "LoanTrack API",
   "scripts": {
     "start": "ts-node src/app.ts",
     "dev": "nodemon --exec node -r ts-node/register src/app.ts",
@@ -29,6 +29,7 @@
     "envalid": "^8.0.0",
     "express": "^4.19.2",
     "http-errors": "^2.0.0",
+    "http-status-codes": "^2.3.0",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "madge": "^6.1.0",

@@ -1,4 +1,4 @@
-import { IsDate, IsPhoneNumber, Matches } from 'class-validator';
+import { IsDateString, IsOptional, IsString, Matches } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -30,9 +30,11 @@ export default class BaseEntity {
 @Entity()
 export class BasicDetails extends BaseEntity {
   @Column()
+  @IsString()
   firstName!: string;
 
   @Column()
+  @IsString()
   lastName!: string;
 
   @Column()
@@ -40,13 +42,15 @@ export class BasicDetails extends BaseEntity {
   countryCode!: string;
 
   @Column()
-  @IsPhoneNumber()
+  @Matches(/^\d{10}$/)
   phoneNumber!: string;
 
   @Column({ nullable: true, type: 'varchar' })
+  @IsString()
+  @IsOptional()
   profilePictureUrl: string | undefined;
 
   @Column()
-  @IsDate()
+  @IsDateString()
   dateOfBirth!: Date;
 }
